@@ -3,11 +3,12 @@ let products = JSON.parse(localStorage.getItem("products")) || [];
 const ADMIN_USERNAME = "simba";
 const ADMIN_PASSWORD = "kalkamaa";
 
-const adminLink = document.getElementById("admin-link");
+const adminSection = document.getElementById("admin");
 
+// SHOW ADMIN ONLY IF LOGGED IN
 if (localStorage.getItem("adminLoggedIn") === "true") {
+    adminSection.classList.remove("hidden");
     showAdminPanel();
-    adminLink.style.display = "inline-block";
 }
 
 function login() {
@@ -16,20 +17,16 @@ function login() {
 
     if (user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
         localStorage.setItem("adminLoggedIn", "true");
-        adminLink.style.display = "inline-block";
+        adminSection.classList.remove("hidden");
         showAdminPanel();
-        displayProducts();
     } else {
-        alert("Wrong admin credentials!");
+        alert("Wrong credentials");
     }
 }
 
 function logout() {
     localStorage.removeItem("adminLoggedIn");
-    adminLink.style.display = "none";
-    document.getElementById("product-panel").style.display = "none";
-    document.getElementById("login-box").style.display = "block";
-    displayProducts();
+    location.reload();
 }
 
 function showAdminPanel() {
@@ -43,24 +40,25 @@ function displayProducts() {
 
     const isAdmin = localStorage.getItem("adminLoggedIn") === "true";
 
-    products.forEach((product, index) => {
+    products.forEach((p, i) => {
         const div = document.createElement("div");
         div.className = "product";
 
         div.innerHTML = `
-            <img src="${product.image}">
-            <h3>${product.name}</h3>
+            <img src="${p.image}">
+            <h3>${p.name}</h3>
             <button class="buy-btn">View on Store</button>
             ${isAdmin ? `<button class="delete-btn">Delete</button>` : ""}
         `;
 
-        div.querySelector(".buy-btn").onclick = () => {
-            window.open(product.link, "_blank");
-        };
+        div.querySelector(".buy-btn").onclick = () =>
+            window.open(p.link, "_blank");
 
         if (isAdmin) {
             div.querySelector(".delete-btn").onclick = () => {
-                deleteProduct(index);
+                products.splice(i, 1);
+                localStorage.setItem("products", JSON.stringify(products));
+                displayProducts();
             };
         }
 
@@ -73,10 +71,7 @@ function addProduct() {
     const image = document.getElementById("image").value;
     const link = document.getElementById("link").value;
 
-    if (!name || !image || !link) {
-        alert("Fill all fields");
-        return;
-    }
+    if (!name || !image || !link) return alert("Fill all fields");
 
     products.push({ name, image, link });
     localStorage.setItem("products", JSON.stringify(products));
@@ -85,13 +80,6 @@ function addProduct() {
     document.getElementById("name").value = "";
     document.getElementById("image").value = "";
     document.getElementById("link").value = "";
-}
-
-function deleteProduct(index) {
-    if (!confirm("Delete this product?")) return;
-    products.splice(index, 1);
-    localStorage.setItem("products", JSON.stringify(products));
-    displayProducts();
 }
 
 displayProducts();
