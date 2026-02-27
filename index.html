@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Soni Collection</title>
+    <title>Soni Fashion Hub</title>
 
+    <!-- CSS (NO / in path) -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Premium Fonts -->
+    <!-- PREMIUM FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
 <header>
@@ -18,7 +20,6 @@
     <nav>
         <a href="#about">About</a>
         <a href="#products">Products</a>
-        <a href="#admin" id="admin-link" style="display:none;">Admin</a>
     </nav>
 </header>
 
@@ -27,46 +28,37 @@
     <p>Style that speaks confidence</p>
 </section>
 
-<!-- ABOUT (PARAGRAPH + LOCATION + PHONE ONLY) -->
+<!-- ABOUT SECTION (TEXT + LOCATION ONLY) -->
 <section id="about" class="about">
-    <h2>About Soni Collection</h2>
+    <h2>About Soni Fashion Hub </h2>
+
     <p>
-        Welcome to <strong>Soni Collection</strong>, where fashion meets quality and trust.
+        Welcome to <strong>Soni Fashion Hub</strong>, where fashion meets quality and trust.
         We focus on showcasing carefully selected clothing that reflects modern trends
         while keeping comfort and affordability in mind.
-
         <br><br>
-
-        Our website works purely as a product showcase. Every item displayed here
-        redirects you to trusted platforms like Meesho and Flipkart, ensuring safe
-        and secure purchasing directly from the source.
-
+        Our website works purely as a product showcase. Each product redirects you
+        to trusted platforms like Meesho or Flipkart for secure purchasing.
         <br><br>
-
-        We are proudly based in India and continuously work to bring fresh styles
-        and trending designs to our customers.
-
-        <br><br>
-
-        <strong>📍 Our Location</strong><br>
-        G2/155 Sangham Vihar, Ratiya Marg, New Delhi – 110080
-
-        <br><br>
-
-        <strong>📞 Contact</strong><br>
-        +91-9910386953<br>
-        +91-8745035150
+        We are proudly based in India and continuously update our collection
+        to bring fresh and trending designs.
     </p>
+
+    <div class="location">
+        <p>📍 <strong>Our Location</strong></p>
+        <p>G2/155 Sangham Vihar, Ratiya Marg, New Delhi – 110080</p>
+        <p>📞 +91-9910386953, +91-8745035150</p>
+    </div>
 </section>
 
-<!-- PRODUCTS (ONLY PRODUCTS) -->
+<!-- PRODUCTS SECTION (ONLY PRODUCTS) -->
 <section id="products">
     <h2>Our Products</h2>
     <div id="product-list" class="products"></div>
 </section>
 
-<!-- ADMIN (HIDDEN UNLESS LOGGED IN) -->
-<section id="admin">
+<!-- ADMIN PANEL (HIDDEN BY DEFAULT) -->
+<section id="admin" class="admin hidden">
     <h2>Admin Panel</h2>
 
     <div id="login-box">
@@ -76,12 +68,11 @@
     </div>
 
     <div id="product-panel" style="display:none;">
-        <h3>Add Product</h3>
         <input type="text" id="name" placeholder="Product Name">
         <input type="text" id="image" placeholder="Product Image URL">
-        <input type="text" id="link" placeholder="Meesho / Flipkart Link">
+        <input type="text" id="link" placeholder="Product Link">
         <button onclick="addProduct()">Add Product</button>
-        <button onclick="logout()" class="logout-btn">Logout</button>
+        <button onclick="logout()" class="logout">Logout</button>
     </div>
 </section>
 
@@ -89,6 +80,7 @@
     <p>© 2026 Soni Collection. All rights reserved.</p>
 </footer>
 
+<!-- JS (NO / in path) -->
 <script src="script.js"></script>
 </body>
 </html>
